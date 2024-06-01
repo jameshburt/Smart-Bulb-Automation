@@ -4,6 +4,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const colorPreview = document.getElementById('colorPreview');
     const applyButton = document.getElementById('applyButton');
     const speedSlider = document.getElementById('speedSlider');
+    const speedValue = document.getElementById('speedValue');
     const startAutomation = document.getElementById('startAutomation');
     const stopAutomation = document.getElementById('stopAutomation');
     const startMusicSync = document.getElementById('startMusicSync');
@@ -16,6 +17,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     colorPicker.addEventListener('input', updatePreview);
     hueSlider.addEventListener('input', updatePreview);
+    speedSlider.addEventListener('input', updateSpeedValue);
     applyButton.addEventListener('click', () => {
         const color = colorPicker.value;
         const hue = hueSlider.value;
@@ -32,6 +34,11 @@ document.addEventListener('DOMContentLoaded', function() {
         const hue = hueSlider.value;
         const adjustedColor = adjustHue(color, hue);
         colorPreview.style.backgroundColor = adjustedColor;
+    }
+
+    function updateSpeedValue() {
+        const speed = speedSlider.value;
+        speedValue.textContent = `Speed: ${speed}ms`;
     }
 
     function changeBulbColor(color, hue) {
@@ -153,4 +160,6 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     updatePreview();
+    updateSpeedValue();
 });
+
