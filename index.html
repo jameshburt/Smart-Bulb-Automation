@@ -5,34 +5,82 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Smart Bulb Controller</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .range-input {
+            --slider-thumb-color: #4A90E2;
+        }
+
+        .range-input::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            height: 20px;
+            width: 20px;
+            border-radius: 50%;
+            background: var(--slider-thumb-color);
+            cursor: pointer;
+        }
+
+        .range-input::-moz-range-thumb {
+            height: 20px;
+            width: 20px;
+            border-radius: 50%;
+            background: var(--slider-thumb-color);
+            cursor: pointer;
+        }
+    </style>
 </head>
-<body class="bg-gray-50 flex items-center justify-center min-h-screen">
-    <div class="bg-white p-8 rounded-lg shadow-lg text-center w-full max-w-lg">
-        <h1 class="text-3xl font-bold mb-6 text-gray-800">Smart Bulb Controller</h1>
-        <div class="mb-6">
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+    <div class="bg-white p-10 rounded-lg shadow-lg text-center w-full max-w-md">
+        <h1 class="text-4xl font-bold mb-8 text-gray-800">Smart Bulb Controller</h1>
+        <div class="mb-8">
             <label for="colorPicker" class="block text-lg font-medium mb-2 text-gray-700">Choose Color</label>
-            <input type="color" id="colorPicker" value="#ffffff" class="block mx-auto p-2 border border-gray-300 rounded-md">
-            <div id="colorPreview" class="w-16 h-16 mx-auto mt-4 rounded-full border-2 border-gray-300 shadow-md" style="background-color: #ffffff;"></div>
+            <input type="color" id="colorPicker" value="#ffffff" class="block mx-auto p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+            <div id="colorPreview" class="w-20 h-20 mx-auto mt-4 rounded-full border-4 border-gray-300 shadow-md" style="background-color: #ffffff;"></div>
         </div>
-        <div class="mb-6">
+        <div class="mb-8">
             <label for="hueSlider" class="block text-lg font-medium mb-2 text-gray-700">Adjust Hue</label>
-            <input type="range" id="hueSlider" min="0" max="360" value="180" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-blue-500">
+            <input type="range" id="hueSlider" min="0" max="360" value="180" class="range-input w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer">
         </div>
-        <div class="mb-6">
+        <div class="mb-8">
             <label for="speedSlider" class="block text-lg font-medium mb-2 text-gray-700">Change Speed</label>
-            <input type="range" id="speedSlider" min="100" max="2000" value="1000" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-blue-500">
+            <input type="range" id="speedSlider" min="100" max="2000" value="1000" class="range-input w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer">
+            <div id="speedValue" class="text-sm text-gray-600 mt-2">Speed: 1000ms</div>
         </div>
-        <div class="mb-6">
-            <label class="block text-lg font-medium mb-2 text-gray-700">Automation</label>
-            <button id="startAutomation" class="bg-green-500 text-white px-6 py-2 rounded-full hover:bg-green-700 transition duration-200">Start</button>
-            <button id="stopAutomation" class="bg-red-500 text-white px-6 py-2 rounded-full hover:bg-red-700 transition duration-200 ml-4">Stop</button>
+        <div class="mb-8 flex justify-center space-x-4">
+            <button id="startAutomation" class="bg-green-500 text-white px-6 py-2 rounded-full hover:bg-green-700 transition duration-200 flex items-center justify-center">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M10 5a1 1 0 011 1v8a1 1 0 11-2 0V6a1 1 0 011-1z" clip-rule="evenodd" />
+                    <path fill-rule="evenodd" d="M5 10a1 1 0 011-1h8a1 1 0 110 2H6a1 1 0 01-1-1z" clip-rule="evenodd" />
+                </svg>
+                Start
+            </button>
+            <button id="stopAutomation" class="bg-red-500 text-white px-6 py-2 rounded-full hover:bg-red-700 transition duration-200 flex items-center justify-center">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M4 4a1 1 0 011-1h10a1 1 0 011 1v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z" clip-rule="evenodd" />
+                </svg>
+                Stop
+            </button>
         </div>
-        <div class="mb-6">
-            <label class="block text-lg font-medium mb-2 text-gray-700">Music Sync</label>
-            <button id="startMusicSync" class="bg-purple-500 text-white px-6 py-2 rounded-full hover:bg-purple-700 transition duration-200">Start</button>
-            <button id="stopMusicSync" class="bg-orange-500 text-white px-6 py-2 rounded-full hover:bg-orange-700 transition duration-200 ml-4">Stop</button>
+        <div class="mb-8 flex justify-center space-x-4">
+            <button id="startMusicSync" class="bg-purple-500 text-white px-6 py-2 rounded-full hover:bg-purple-700 transition duration-200 flex items-center justify-center">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M10 2a8 8 0 100 16 8 8 0 000-16zM8 11V6h2v5h1v2H7v-2h1zm-1 0v2h4v-2H7zm1-1h4V6H8v4z" clip-rule="evenodd" />
+                </svg>
+                Start
+            </button>
+            <button id="stopMusicSync" class="bg-orange-500 text-white px-6 py-2 rounded-full hover:bg-orange-700 transition duration-200 flex items-center justify-center">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M4 4a1 1 0 011-1h10a1 1 0 011 1v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z" clip-rule="evenodd" />
+                </svg>
+                Stop
+            </button>
         </div>
-        <button id="applyButton" class="bg-blue-600 text-white px-6 py-2 rounded-full hover:bg-blue-700 transition duration-200">Apply</button>
+        <button id="applyButton" class="bg-blue-600 text-white px-6 py-2 rounded-full hover:bg-blue-700 transition duration-200 flex items-center justify-center">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8 11H6a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2H10V9a1 1 0 10-2 0v2z" clip-rule="evenodd" />
+            </svg>
+            Apply
+        </button>
     </div>
     <script src="script.js"></script>
 </body>
