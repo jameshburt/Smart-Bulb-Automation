@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Bulb Controller</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 flex items-center justify-center min-h-screen">
+    <div class="bg-white p-8 rounded-lg shadow-lg text-center w-full max-w-lg">
+        <h1 class="text-3xl font-bold mb-6 text-gray-800">Smart Bulb Controller</h1>
+        <div class="mb-6">
+            <label for="colorPicker" class="block text-lg font-medium mb-2 text-gray-700">Choose Color</label>
+            <input type="color" id="colorPicker" value="#ffffff" class="block mx-auto p-2 border border-gray-300 rounded-md">
+            <div id="colorPreview" class="w-16 h-16 mx-auto mt-4 rounded-full border-2 border-gray-300 shadow-md" style="background-color: #ffffff;"></div>
+        </div>
+        <div class="mb-6">
+            <label for="hueSlider" class="block text-lg font-medium mb-2 text-gray-700">Adjust Hue</label>
+            <input type="range" id="hueSlider" min="0" max="360" value="180" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-blue-500">
+        </div>
+        <div class="mb-6">
+            <label for="speedSlider" class="block text-lg font-medium mb-2 text-gray-700">Change Speed</label>
+            <input type="range" id="speedSlider" min="100" max="2000" value="1000" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-blue-500">
+        </div>
+        <div class="mb-6">
+            <label class="block text-lg font-medium mb-2 text-gray-700">Automation</label>
+            <button id="startAutomation" class="bg-green-500 text-white px-6 py-2 rounded-full hover:bg-green-700 transition duration-200">Start</button>
+            <button id="stopAutomation" class="bg-red-500 text-white px-6 py-2 rounded-full hover:bg-red-700 transition duration-200 ml-4">Stop</button>
+        </div>
+        <div class="mb-6">
+            <label class="block text-lg font-medium mb-2 text-gray-700">Music Sync</label>
+            <button id="startMusicSync" class="bg-purple-500 text-white px-6 py-2 rounded-full hover:bg-purple-700 transition duration-200">Start</button>
+            <button id="stopMusicSync" class="bg-orange-500 text-white px-6 py-2 rounded-full hover:bg-orange-700 transition duration-200 ml-4">Stop</button>
+        </div>
+        <button id="applyButton" class="bg-blue-600 text-white px-6 py-2 rounded-full hover:bg-blue-700 transition duration-200">Apply</button>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
